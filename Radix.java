@@ -67,22 +67,35 @@ public class Radix{
     //probably not most efficient, but scales linearly and works.
     SortableLinkedList positive = new SortableLinkedList();
     SortableLinkedList negative = new SortableLinkedList();
-    for(int i = 0; i < data.size(); i++){
-      if(data.get(i) < 0){
-        negative.add(data.get(i));
+    // for(int i = 0; i < data.size(); i++){
+    //   if(data.get(i) < 0){
+    //     negative.add(data.get(i));
+    //   }else{
+    //     positive.add(data.get(i));
+    //   }
+    // }
+    while(data.size() > 0){
+      if(data.get(0) < 0){
+        negative.add(data.remove(0));
       }else{
-        positive.add(data.get(i));
+        positive.add(data.remove(0));
       }
     }
     radixSortSimple(positive);
     radixSortSimpleRev(negative);
-    int neg = negative.size();
-    int pos = positive.size();
-    for(int i = 0; i < neg; i++){
-      data.set(i, negative.get(i));
+    // int neg = negative.size();
+    // int pos = positive.size();
+    // for(int i = 0; i < neg; i++){
+    //   data.set(i, negative.get(i));
+    // }
+    // for(int i = neg; i < neg + pos; i++){
+    //   data.set(i, positive.get(i-neg));
+    // }
+    while(negative.size() > 0){
+      data.add(negative.remove(0));
     }
-    for(int i = neg; i < neg + pos; i++){
-      data.set(i, positive.get(i-neg));
+    while(positive.size() > 0){
+      data.add(positive.remove(0));
     }
   }
 }
