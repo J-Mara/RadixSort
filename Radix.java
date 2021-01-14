@@ -64,6 +64,7 @@ public class Radix{
     }
   }
   public static void radixSort(SortableLinkedList data){
+    //probably not most efficient, but scales linearly and works.
     SortableLinkedList positive = new SortableLinkedList();
     SortableLinkedList negative = new SortableLinkedList();
     for(int i = 0; i < data.size(); i++){
