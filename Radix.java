@@ -43,4 +43,45 @@ public class Radix{
       merge(data, buckets);
     }
   }
+  public static void radixSortSimpleRev(SortableLinkedList data){
+    SortableLinkedList[] buckets = new SortableLinkedList[10];
+    buckets[0] = new SortableLinkedList();
+    buckets[1] = new SortableLinkedList();
+    buckets[2] = new SortableLinkedList();
+    buckets[3] = new SortableLinkedList();
+    buckets[4] = new SortableLinkedList();
+    buckets[5] = new SortableLinkedList();
+    buckets[6] = new SortableLinkedList();
+    buckets[7] = new SortableLinkedList();
+    buckets[8] = new SortableLinkedList();
+    buckets[9] = new SortableLinkedList();
+    for(int i = 0; i < largest(data); i++){
+      while (data.size() > 0){
+        buckets[Math.abs(nth(data.get(0), i)-9)].add(data.get(0));
+        data.remove(0);
+      }
+      merge(data, buckets);
+    }
+  }
+  public static void radixSort(SortableLinkedList data){
+    SortableLinkedList positive = new SortableLinkedList();
+    SortableLinkedList negative = new SortableLinkedList();
+    for(int i = 0; i < data.size(); i++){
+      if(data.get(i) < 0){
+        negative.add(data.get(i));
+      }else{
+        positive.add(data.get(i));
+      }
+    }
+    radixSortSimple(positive);
+    radixSortSimpleRev(negative);
+    int neg = negative.size();
+    int pos = positive.size();
+    for(int i = 0; i < neg; i++){
+      data.set(i, negative.get(i));
+    }
+    for(int i = neg; i < neg + pos; i++){
+      data.set(i, positive.get(i-neg));
+    }
+  }
 }
