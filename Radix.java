@@ -14,15 +14,15 @@ public class Radix{
       original.extend(buckets[i]);
     }
   }
-  private static int largest(SortableLinkedList data){
-    int result = 0;
-    for(int i = 0; i < data.size(); i++){
-      if(length(data.get(i)) > result){
-        result = length(data.get(i));
-      }
-    }
-    return result;
-  }
+  // private static int largest(SortableLinkedList data){
+  //   int result = 0;
+  //   for(int i = 0; i < data.size(); i++){
+  //     if(length(data.get(i)) > result){
+  //       result = length(data.get(i));
+  //     }
+  //   }
+  //   return result;
+  // }
   public static void radixSortSimple(SortableLinkedList data){
     SortableLinkedList[] buckets = new SortableLinkedList[10];
     buckets[0] = new SortableLinkedList();
@@ -109,11 +109,13 @@ public class Radix{
     // for(int i = neg; i < neg + pos; i++){
     //   data.set(i, positive.get(i-neg));
     // }
-    while(negative.size() > 0){
-      data.add(negative.remove(0));
-    }
-    while(positive.size() > 0){
-      data.add(positive.remove(0));
-    }
+    // while(negative.size() > 0){
+    //   data.add(negative.remove(0));
+    // }
+    // while(positive.size() > 0){
+    //   data.add(positive.remove(0));
+    // }
+    data.extend(negative);
+    data.extend(positive);
   }
 }
