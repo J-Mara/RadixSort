@@ -35,7 +35,16 @@ public class Radix{
     buckets[7] = new SortableLinkedList();
     buckets[8] = new SortableLinkedList();
     buckets[9] = new SortableLinkedList();
-    for(int i = 0; i < largest(data); i++){
+    int largest = 0;
+    while(data.size() > 0){
+      if(length(data.get(0)) > largest){
+        largest = length(data.get(0));
+      }
+      buckets[nth(data.get(0), 0)].add(data.get(0));
+      data.remove(0);
+    }
+    merge(data, buckets);
+    for(int i = 1; i < largest; i++){
       while (data.size() > 0){
         buckets[nth(data.get(0), i)].add(data.get(0));
         data.remove(0);
@@ -55,7 +64,16 @@ public class Radix{
     buckets[7] = new SortableLinkedList();
     buckets[8] = new SortableLinkedList();
     buckets[9] = new SortableLinkedList();
-    for(int i = 0; i < largest(data); i++){
+    int largest = 0;
+    while(data.size() > 0){
+      if(length(data.get(0)) > largest){
+        largest = length(data.get(0));
+      }
+      buckets[Math.abs(nth(data.get(0), 0)-9)].add(data.get(0));
+      data.remove(0);
+    }
+    merge(data, buckets);
+    for(int i = 1; i < largest; i++){
       while (data.size() > 0){
         buckets[Math.abs(nth(data.get(0), i)-9)].add(data.get(0));
         data.remove(0);
